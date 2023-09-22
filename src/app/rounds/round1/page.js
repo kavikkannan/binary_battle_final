@@ -1,11 +1,11 @@
 'use client';
 import React from 'react'
-import Sidebar from '../../Components/Sidebar'
 import { useEffect, useState } from 'react'
 import {
   updateDoc,
+  collection,
   doc,
-  getDoc,
+  getDocs,
 } from 'firebase/firestore';
 import { database} from '../../config/firebaseConfig';
 const r1 = () => {
@@ -112,7 +112,21 @@ const r1 = () => {
               console.error('Error fetching field value:', error);
             }
       };
-
+      const [teamlist,setteamlist]=useState([]);
+      const teamref=collection(database,"question")
+      const fetchquestion = async() => {
+        try{
+          const data = await getDocs(teamref);
+          const filtereddata=data.docs.map((doc)=>({
+            ...doc.data(),
+            id:doc.id,
+          }));
+          setteamlist(filtereddata);
+          } catch(err){
+            console.error(err);
+          }
+      }
+      fetchquestion();
   const addData = (a) => {
       updateDoc(user_data, { 
         [a]: ans
@@ -130,22 +144,28 @@ const r1 = () => {
 
   
   return (
-    <div className="bg-[#010c34] min-h-[100vh]">
-      <div className='w-screen overflow-auto max-h-[20%]'>
-        <div className='max-w-[100%] max-h-[100%] flex justify-around'>
-          <div className='w-[25%] max-h-[100%]' >
-          <Sidebar />
-          </div>
-          <div className='w-[70%] max-h-[100%]'>
-            <div className='max-h-[90%] m-2'>
+    <div className="bg-[#010c34] min-h-[100vh] ">
+      <div className='w-screen overflow-auto max-h-[20%] '>
+        <div className='max-w-[100%] max-h-[100%] flex justify-around '>
+          {/* <div className='w-[25%] max-h-[100%] m-auto' >
+               
+          </div> */}
+          <div className='w-[70%] max-h-[100%] m-auto'>
+            <div className='max-h-[90%]  m-auto'>
             <div className="bg-opacity-10 bg-gradient-to-b from-[#4d4f4f6a] from-10% via-[#42434462] via-30% to-[#41414100] to-100% ... text-white max-h-[100%] max-w-[100%] overflow-y-auto grid grid-rows-auto gap-0 z-0 m-2">
             <ul className={"md:flex-auto px-4 z-0 py-3"}>
             <li className={`px-7 py-3 mb-4 mt-3 transition duration-300 ease-in-out opacity-80 transform text-center `}>
                 <div className="mb-2">
-                    <p className="text-white text-xl font-bold">Question 1</p>
+                <p className="text-white text-xl font-bold">Question 1</p>
+                <div>
+                  {teamlist.map((team)=>(
+            <div className="bg-[#01071D] p-3 rounded-md text-left ">
+              <span className='mb-4'>{team.r1q1}</span>
+              </div>))}
+                  </div>       
                     </div>
                     <div className="bg-[#01071D] p-3 rounded-md text-left ">
-                        <span className='mb-4'>Textbox content for Question 1</span>
+                      
                         <input
                             className="bg-[#292b30] w-full h-16 bg-transparent text-white border-none focus:outline-none mt-10 bg-01071D bg-opacity-72 rounded-md"
                             placeholder="Enter your answer here..."
@@ -160,10 +180,16 @@ const r1 = () => {
                 </li>
                 <li className={`px-7 py-3 mb-4 mt-3 transition duration-300 ease-in-out opacity-80 transform text-center `}>
                 <div className="mb-2">
-                    <p className="text-white text-xl font-bold">Question 2</p>
+                <p className="text-white text-xl font-bold">Question 2</p>
+                <div>
+                  {teamlist.map((team)=>(
+            <div className="bg-[#01071D] p-3 rounded-md text-left ">
+              <span className='mb-4'>{team.r1q2}</span>
+              </div>))}
+                  </div>       
                     </div>
                     <div className="bg-[#01071D] p-3 rounded-md text-left ">
-                        <span className='mb-4'>Textbox content for Question 1</span>
+                      
                         <input
                             className="bg-[#292b30] w-full h-16 bg-transparent text-white border-none focus:outline-none mt-10 bg-01071D bg-opacity-72 rounded-md"
                             placeholder="Enter your answer here..."
@@ -171,17 +197,23 @@ const r1 = () => {
                         ></input>
                         <button
                         className="bg-[#010c34] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-                        onClick={() => addData('r1q1')}>
+                        onClick={() => addData('r1q2')}>
                           submit
                         </button>
                     </div>
                 </li>
                 <li className={`px-7 py-3 mb-4 mt-3 transition duration-300 ease-in-out opacity-80 transform text-center `}>
                 <div className="mb-2">
-                    <p className="text-white text-xl font-bold">Question 3</p>
+                <p className="text-white text-xl font-bold">Question 3</p>
+                <div>
+                  {teamlist.map((team)=>(
+            <div className="bg-[#01071D] p-3 rounded-md text-left ">
+              <span className='mb-4'>{team.r1q3}</span>
+              </div>))}
+                  </div>       
                     </div>
                     <div className="bg-[#01071D] p-3 rounded-md text-left ">
-                        <span className='mb-4'>Textbox content for Question 1</span>
+                      
                         <input
                             className="bg-[#292b30] w-full h-16 bg-transparent text-white border-none focus:outline-none mt-10 bg-01071D bg-opacity-72 rounded-md"
                             placeholder="Enter your answer here..."
@@ -189,17 +221,23 @@ const r1 = () => {
                         ></input>
                         <button
                         className="bg-[#010c34] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-                        onClick={() => addData('r1q1')}>
+                        onClick={() => addData('r1q3')}>
                           submit
                         </button>
                     </div>
                 </li>
                 <li className={`px-7 py-3 mb-4 mt-3 transition duration-300 ease-in-out opacity-80 transform text-center `}>
                 <div className="mb-2">
-                    <p className="text-white text-xl font-bold">Question 4</p>
+                <p className="text-white text-xl font-bold">Question 4</p>
+                <div>
+                  {teamlist.map((team)=>(
+            <div className="bg-[#01071D] p-3 rounded-md text-left ">
+              <span className='mb-4'>{team.r1q4}</span>
+              </div>))}
+                  </div>       
                     </div>
                     <div className="bg-[#01071D] p-3 rounded-md text-left ">
-                        <span className='mb-4'>Textbox content for Question 1</span>
+                      
                         <input
                             className="bg-[#292b30] w-full h-16 bg-transparent text-white border-none focus:outline-none mt-10 bg-01071D bg-opacity-72 rounded-md"
                             placeholder="Enter your answer here..."
@@ -207,17 +245,23 @@ const r1 = () => {
                         ></input>
                         <button
                         className="bg-[#010c34] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-                        onClick={() => addData('r1q1')}>
+                        onClick={() => addData('r1q4')}>
                           submit
                         </button>
                     </div>
                 </li>
                 <li className={`px-7 py-3 mb-4 mt-3 transition duration-300 ease-in-out opacity-80 transform text-center `}>
                 <div className="mb-2">
-                    <p className="text-white text-xl font-bold">Question 5</p>
+                <p className="text-white text-xl font-bold">Question 5</p>
+                <div>
+                  {teamlist.map((team)=>(
+            <div className="bg-[#01071D] p-3 rounded-md text-left ">
+              <span className='mb-4'>{team.r1q5}</span>
+              </div>))}
+                  </div>       
                     </div>
                     <div className="bg-[#01071D] p-3 rounded-md text-left ">
-                        <span className='mb-4'>Textbox content for Question 1</span>
+                      
                         <input
                             className="bg-[#292b30] w-full h-16 bg-transparent text-white border-none focus:outline-none mt-10 bg-01071D bg-opacity-72 rounded-md"
                             placeholder="Enter your answer here..."
@@ -225,17 +269,23 @@ const r1 = () => {
                         ></input>
                         <button
                         className="bg-[#010c34] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-                        onClick={() => addData('r1q1')}>
+                        onClick={() => addData('r1q5')}>
                           submit
                         </button>
                     </div>
                 </li>
                 <li className={`px-7 py-3 mb-4 mt-3 transition duration-300 ease-in-out opacity-80 transform text-center `}>
                 <div className="mb-2">
-                    <p className="text-white text-xl font-bold">Question 6</p>
+                <p className="text-white text-xl font-bold">Question 6</p>
+                <div>
+                  {teamlist.map((team)=>(
+            <div className="bg-[#01071D] p-3 rounded-md text-left ">
+              <span className='mb-4'>{team.r1q6}</span>
+              </div>))}
+                  </div>       
                     </div>
                     <div className="bg-[#01071D] p-3 rounded-md text-left ">
-                        <span className='mb-4'>Textbox content for Question 1</span>
+                      
                         <input
                             className="bg-[#292b30] w-full h-16 bg-transparent text-white border-none focus:outline-none mt-10 bg-01071D bg-opacity-72 rounded-md"
                             placeholder="Enter your answer here..."
@@ -243,17 +293,23 @@ const r1 = () => {
                         ></input>
                         <button
                         className="bg-[#010c34] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-                        onClick={() => addData('r1q1')}>
+                        onClick={() => addData('r1q6')}>
                           submit
                         </button>
                     </div>
                 </li>
                 <li className={`px-7 py-3 mb-4 mt-3 transition duration-300 ease-in-out opacity-80 transform text-center `}>
                 <div className="mb-2">
-                    <p className="text-white text-xl font-bold">Question 7</p>
+                <p className="text-white text-xl font-bold">Question 7</p>
+                <div>
+                  {teamlist.map((team)=>(
+            <div className="bg-[#01071D] p-3 rounded-md text-left ">
+              <span className='mb-4'>{team.r1q7}</span>
+              </div>))}
+                  </div>       
                     </div>
                     <div className="bg-[#01071D] p-3 rounded-md text-left ">
-                        <span className='mb-4'>Textbox content for Question 1</span>
+                      
                         <input
                             className="bg-[#292b30] w-full h-16 bg-transparent text-white border-none focus:outline-none mt-10 bg-01071D bg-opacity-72 rounded-md"
                             placeholder="Enter your answer here..."
@@ -261,17 +317,23 @@ const r1 = () => {
                         ></input>
                         <button
                         className="bg-[#010c34] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-                        onClick={() => addData('r1q1')}>
+                        onClick={() => addData('r1q7')}>
                           submit
                         </button>
                     </div>
                 </li>
                 <li className={`px-7 py-3 mb-4 mt-3 transition duration-300 ease-in-out opacity-80 transform text-center `}>
                 <div className="mb-2">
-                    <p className="text-white text-xl font-bold">Question 8</p>
+                <p className="text-white text-xl font-bold">Question 8</p>
+                <div>
+                  {teamlist.map((team)=>(
+            <div className="bg-[#01071D] p-3 rounded-md text-left ">
+              <span className='mb-4'>{team.r1q8}</span>
+              </div>))}
+                  </div>       
                     </div>
                     <div className="bg-[#01071D] p-3 rounded-md text-left ">
-                        <span className='mb-4'>Textbox content for Question 1</span>
+                      
                         <input
                             className="bg-[#292b30] w-full h-16 bg-transparent text-white border-none focus:outline-none mt-10 bg-01071D bg-opacity-72 rounded-md"
                             placeholder="Enter your answer here..."
@@ -279,17 +341,23 @@ const r1 = () => {
                         ></input>
                         <button
                         className="bg-[#010c34] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-                        onClick={() => addData('r1q1')}>
+                        onClick={() => addData('r1q8')}>
                           submit
                         </button>
                     </div>
                 </li>
                 <li className={`px-7 py-3 mb-4 mt-3 transition duration-300 ease-in-out opacity-80 transform text-center `}>
                 <div className="mb-2">
-                    <p className="text-white text-xl font-bold">Question 9</p>
+                <p className="text-white text-xl font-bold">Question 9</p>
+                <div>
+                  {teamlist.map((team)=>(
+            <div className="bg-[#01071D] p-3 rounded-md text-left ">
+              <span className='mb-4'>{team.r1q9}</span>
+              </div>))}
+                  </div>       
                     </div>
                     <div className="bg-[#01071D] p-3 rounded-md text-left ">
-                        <span className='mb-4'>Textbox content for Question 1</span>
+                      
                         <input
                             className="bg-[#292b30] w-full h-16 bg-transparent text-white border-none focus:outline-none mt-10 bg-01071D bg-opacity-72 rounded-md"
                             placeholder="Enter your answer here..."
@@ -297,17 +365,23 @@ const r1 = () => {
                         ></input>
                         <button
                         className="bg-[#010c34] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-                        onClick={() => addData('r1q1')}>
+                        onClick={() => addData('r1q9')}>
                           submit
                         </button>
                     </div>
                 </li>
                 <li className={`px-7 py-3 mb-4 mt-3 transition duration-300 ease-in-out opacity-80 transform text-center `}>
                 <div className="mb-2">
-                    <p className="text-white text-xl font-bold">Question 10</p>
+                <p className="text-white text-xl font-bold">Question 10</p>
+                <div>
+                  {teamlist.map((team)=>(
+            <div className="bg-[#01071D] p-3 rounded-md text-left ">
+              <span className='mb-4'>{team.r1q10}</span>
+              </div>))}
+                  </div>       
                     </div>
                     <div className="bg-[#01071D] p-3 rounded-md text-left ">
-                        <span className='mb-4'>Textbox content for Question 1</span>
+                      
                         <input
                             className="bg-[#292b30] w-full h-16 bg-transparent text-white border-none focus:outline-none mt-10 bg-01071D bg-opacity-72 rounded-md"
                             placeholder="Enter your answer here..."
@@ -315,17 +389,23 @@ const r1 = () => {
                         ></input>
                         <button
                         className="bg-[#010c34] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-                        onClick={() => addData('r1q1')}>
+                        onClick={() => addData('r1q10')}>
                           submit
                         </button>
                     </div>
                 </li>
                 <li className={`px-7 py-3 mb-4 mt-3 transition duration-300 ease-in-out opacity-80 transform text-center `}>
                 <div className="mb-2">
-                    <p className="text-white text-xl font-bold">Question 2</p>
+                <p className="text-white text-xl font-bold">Question 11</p>
+                <div>
+                  {teamlist.map((team)=>(
+            <div className="bg-[#01071D] p-3 rounded-md text-left ">
+              <span className='mb-4'>{team.r1q11}</span>
+              </div>))}
+                  </div>       
                     </div>
                     <div className="bg-[#01071D] p-3 rounded-md text-left ">
-                        <span className='mb-4'>Textbox content for Question 1</span>
+                      
                         <input
                             className="bg-[#292b30] w-full h-16 bg-transparent text-white border-none focus:outline-none mt-10 bg-01071D bg-opacity-72 rounded-md"
                             placeholder="Enter your answer here..."
@@ -333,13 +413,60 @@ const r1 = () => {
                         ></input>
                         <button
                         className="bg-[#010c34] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-                        onClick={() => addData('r1q1')}>
+                        onClick={() => addData('r1q11')}>
                           submit
                         </button>
                     </div>
                 </li>
-            </ul>
-
+                <li className={`px-7 py-3 mb-4 mt-3 transition duration-300 ease-in-out opacity-80 transform text-center `}>
+                <div className="mb-2">
+                <p className="text-white text-xl font-bold">Question 12</p>
+                <div>
+                  {teamlist.map((team)=>(
+            <div className="bg-[#01071D] p-3 rounded-md text-left ">
+              <span className='mb-4'>{team.r1q12}</span>
+              </div>))}
+                  </div>       
+                    </div>
+                    <div className="bg-[#01071D] p-3 rounded-md text-left ">
+                      
+                        <input
+                            className="bg-[#292b30] w-full h-16 bg-transparent text-white border-none focus:outline-none mt-10 bg-01071D bg-opacity-72 rounded-md"
+                            placeholder="Enter your answer here..."
+                            onChange={(e) => setans((e).target.value)}
+                        ></input>
+                        <button
+                        className="bg-[#010c34] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                        onClick={() => addData('r1q12')}>
+                          submit
+                        </button>
+                    </div>
+                </li>
+                <li className={`px-7 py-3 mb-4 mt-3 transition duration-300 ease-in-out opacity-80 transform text-center `}>
+                <div className="mb-2">
+                <p className="text-white text-xl font-bold">Question 13</p>
+                <div>
+                  {teamlist.map((team)=>(
+            <div className="bg-[#01071D] p-3 rounded-md text-left ">
+              <span className='mb-4'>{team.r1q13}</span>
+              </div>))}
+                  </div>       
+                    </div>
+                    <div className="bg-[#01071D] p-3 rounded-md text-left ">
+                      
+                        <input
+                            className="bg-[#292b30] w-full h-16 bg-transparent text-white border-none focus:outline-none mt-10 bg-01071D bg-opacity-72 rounded-md"
+                            placeholder="Enter your answer here..."
+                            onChange={(e) => setans((e).target.value)}
+                        ></input>
+                        <button
+                        className="bg-[#010c34] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+                        onClick={() => addData('r1q13')}>
+                          submit
+                        </button>
+                    </div>
+                </li>
+                </ul>
         </div>
             </div>
             
