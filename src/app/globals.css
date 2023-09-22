@@ -1,0 +1,209 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+
+@keyframes glowing-opacity {
+  0% {
+    box-shadow: 0 0 15px #16dfe3;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  5% {
+    box-shadow: 0 0 15px #16dfe3;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  10% {
+    box-shadow: 0 0 15px #16dfe3;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  15% {
+    box-shadow: 0 0 15px #00c8dc;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  20% {
+    box-shadow: 0 0 15px #00b1d3;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  25% {
+    box-shadow: 0 0 15px #0099c9;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  30% {
+    box-shadow: 0 0 15px #0082bc;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  35% {
+    box-shadow: 0 0 15px #006bac;
+    opacity: 1;
+    /*border: 2px solid rgba(109, 109, 109, 0.7);*/
+  }
+  40% {
+    box-shadow: 0 0 15px #00549a;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  45% {
+    box-shadow: 0 0 15px #003e85;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  50% {
+    box-shadow: 0 0 15px #00276e;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  55% {
+    box-shadow: 0 0 15px #071055;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  60% {
+    box-shadow: 0 0 15px #00276e;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  65% {
+    box-shadow: 0 0 15px #003e85;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  70% {
+    box-shadow: 0 0 15px #00549a;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  75% {
+    box-shadow: 0 0 15px #006bac;
+    opacity: 1;
+    /*border: 2px solid rgba(109, 109, 109, 0.7);*/
+  }
+  80% {
+    box-shadow: 0 0 15px #0082bc;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  85% {
+    box-shadow: 0 0 15px #0099c9;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  90% {
+    box-shadow: 0 0 15px #00b1d3;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  95% {
+    box-shadow: 0 0 15px #00c8dc;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  100% {
+    box-shadow: 0 0 15px #16dfe3;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  
+}
+
+.animate-glow-opacity {
+  transition-duration: 300ms;
+}
+
+.animate-glow-opacity:hover {
+  animation: glowing-opacity 10s infinite;
+  transition-duration: 300ms;
+}
+
+
+
+@keyframes glowing-opacity-green {
+  0% {
+    box-shadow: 0 0 15px #0baf08;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  
+  50% {
+    box-shadow: 0 0 15px #087e00;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  
+  100% {
+    box-shadow: 0 0 15px #0baf08;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  
+}
+
+.animate-glow-opacity-green {
+  transition-duration: 300ms;
+}
+
+.animate-glow-opacity-green:hover {
+  animation: glowing-opacity-green 10s infinite;
+  transition-duration: 300ms;
+}
+
+
+@keyframes glowing-opacity-red {
+  0% {
+    box-shadow: 0 0 15px #af5308;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  
+  50% {
+    box-shadow: 0 0 15px #c88003;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  
+  100% {
+    box-shadow: 0 0 15px #af5308;
+    opacity: 1;
+    /*border: 2px solid rgba(1, 2, 0, 0.7);*/
+  }
+  
+}
+
+.animate-glow-opacity-red {
+  transition-duration: 300ms;
+}
+
+.animate-glow-opacity-red:hover {
+  animation: glowing-opacity-red 10s infinite;
+  transition-duration: 300ms;
+}
