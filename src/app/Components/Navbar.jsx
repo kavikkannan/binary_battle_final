@@ -47,14 +47,14 @@ function Navbar() {
           </div>
         </Link>
 
-        <Link href="round2">
+        <Link href="r2">
           <div className="px-8 py-2 mr-3 ml-3 transition duration-300 ease-in-out opacity-50 transform hover:bg-stone-300 hover:text-black hover:shadow-lg hover:scale-105 rounded-md hover:opacity-100 animate-glow-opacity">
           <FontAwesomeIcon icon={faMagento} className='px-2 h-5 w-5'/>
             Labyrinthine Odessey
           </div>
         </Link>
 
-        <Link href="round3">
+        <Link href="r3">
           <div className="px-8 py-2 ml-3 transition duration-300 ease-in-out opacity-50 transform hover:bg-stone-300 hover:text-black hover:shadow-lg hover:scale-105 rounded-md hover:opacity-100 animate-glow-opacity">
           <FontAwesomeIcon icon={faLock} className='px-2 h-5 w-5'/>
             The Enigma
